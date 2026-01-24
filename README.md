@@ -1,141 +1,157 @@
-# TMS POC - Task Management System (Proof of Concept)
+# Transportation Management System (TMS) - Proof of Concept
 
-A modern web-based **Task Management System** (TMS) built as a Proof of Concept to demonstrate task creation, assignment, tracking, and role-based access control for employees and administrators.
+**License:** MIT  
+**Tech Stack:** React, Node.js, GraphQL  
 
-**Live Demo**  
-- **Frontend**: [https://tms-vevb.onrender.com/login](https://tms-vevb.onrender.com/login)  
-- **Backend API**: [https://tms-backend-fh93.onrender.com](https://tms-backend-fh93.onrender.com) (GraphQL endpoint – use GraphQL Playground or Apollo Client)
+---
+
+## Overview
+
+This is a **Proof of Concept (POC)** for a **Transportation Management System (TMS)**, demonstrating a full-stack web application for managing shipments and logistics operations. The system provides a responsive user interface for viewing, managing, and tracking shipments with **role-based access control**.  
+
+Built with modern web technologies, it showcases scalable architecture, GraphQL API integration, and secure authentication. The project emphasizes user experience, performance optimization, and clean code practices.
+
+---
+
+## Key Highlights
+
+- **Frontend:** React application with Tailwind CSS for responsive, mobile-first design.  
+- **Backend:** Node.js with GraphQL API using Apollo Server, supporting queries, mutations, and pagination.  
+- **Authentication:** JWT-based with role-based authorization (Admin vs Employee).  
+- **Data Management:** In-memory storage for shipments (extensible to MongoDB/PostgreSQL).  
+- **Deployment Ready:** Frontend on Vercel, Backend on Render.  
+
+---
 
 ## Tech Stack
 
 ### Frontend
-- **React** + **Vite** (or CRA) – fast and modern React setup
-- **React Router** – client-side routing
-- **State Management**: Context API / Redux Toolkit / Zustand (as implemented)
-- **UI Library**: Material-UI / Tailwind CSS / Chakra UI / Ant Design (whichever is used)
-- **Form Handling**: React Hook Form + Zod / Formik + Yup
-- **HTTP Client**: Axios / Apollo Client (for GraphQL)
-- **Deployment**: Render.com
+
+- **Framework:** React 18.2.0 (Vite)
+- **Styling:** Tailwind CSS 4.1.18
+- **GraphQL Client:** Apollo Client 4.1.2
+- **Routing:** React Router DOM 6.8.0
+- **State Management:** React Context API
+- **UI Components:** Headless UI
+- **Other Tools:** JWT Decode 4.0.0, ESLint, Prettier
 
 ### Backend
-- **Node.js** + **Express** / **Apollo Server**
-- **GraphQL** (Apollo Server) – API layer
-- **Database**: MongoDB / PostgreSQL / Prisma / Mongoose (as implemented)
-- **Authentication**: JWT + bcrypt
-- **ORM/ODM**: Prisma / Mongoose / TypeORM
-- **Deployment**: Render.com
 
-### Other Tools
-- Git + GitHub for version control
-- Environment variables via `.env`
-- CORS handling
+- **Runtime:** Node.js 18+
+- **GraphQL Server:** Apollo Server 16.12.0
+- **Authentication:** JSON Web Tokens (JWT)
+- **Data Manipulation:** Lodash
+- **Data Storage:** In-memory array (POC; extensible to MongoDB/PostgreSQL)
 
-## Features Implemented
+### Development & Deployment
+
+- **Build Tool:** Vite
+- **Version Control:** Git/GitHub
+- **Deployment:** Vercel (frontend), Render (backend)
+- **Testing:** Jest (basic unit tests)
+- **Methodologies:** Agile (Scrum), Test-Driven Development (TDD)
+
+---
+
+## Features
 
 ### Core Features
-- User authentication (Login / Register / Logout)
-- Role-based access control (Admin vs Employee)
-- Create, Read, Update, Delete (CRUD) tasks / tickets / assignments
-- Task status tracking (To Do → In Progress → Done / custom statuses)
-- Task assignment to employees
-- Priority & due date support
-- Basic dashboard with task overview / statistics
-- Responsive design (mobile-friendly)
 
-### Additional (if implemented)
-- Search & filter tasks
-- Notifications (in-app / email – if added)
-- File attachments on tasks
-- Commenting / activity log on tasks
-- Export tasks (CSV / PDF – if added)
+- **User Authentication:** Secure login with JWT tokens, supporting multiple roles.  
+- **Dashboard:** Responsive shipments dashboard with toggle between Grid View (table) and Tile View (cards).  
+- **Shipments Management:**  
+  - View shipments with ID, Shipment Number, Origin, Destination, Status, Carrier, Weight, Value, Ship Date, Delivery Date, Notes.  
+  - Pagination (10 items per page) with sorting by shipment number.  
+  - Detailed modal view on tile/row click.  
+- **Navigation:** Horizontal navbar with hamburger menu for mobile.  
+- **Performance Optimizations:** Lazy loading, memoization, efficient GraphQL queries.  
+- **Security:** Role-based access control (RBAC).  
+- **UI/UX Enhancements:** Mobile-first responsive design, toast notifications, accessible styling (WCAG compliant).
+
+### Additional Capabilities
+
+- GraphQL queries & mutations with filters, pagination, and CRUD operations.  
+- React Hooks and Context API for state management.  
+- Graceful error handling and network recovery.  
+- Modular folder structure for easy extensibility (reports, analytics).
+
+---
 
 ## Admin vs Employee Access
 
-| Feature                     | Admin                          | Employee                     |
-|-----------------------------|--------------------------------|------------------------------|
-| Create new tasks            | Yes                            | Yes (or limited scope)       |
-| Assign tasks to users       | Yes                            | No / limited                 |
-| Edit / Delete any task      | Yes                            | Only own tasks (or assigned) |
-| View all tasks & users      | Yes                            | Only own / assigned tasks    |
-| Manage users (CRUD)         | Yes                            | No                           |
-| Change task status          | Yes                            | Yes (on assigned tasks)      |
-| Access admin dashboard      | Yes                            | No                           |
-| View reports / analytics    | Yes                            | No / basic only              |
+**Role-based access control (RBAC)** is enforced on frontend and backend via JWT tokens.
 
-*Note: Exact permissions may vary slightly based on your final implementation.*
+| Role      | Access                                         | UI Features                                      | Backend Permissions               |
+|-----------|-----------------------------------------------|-------------------------------------------------|----------------------------------|
+| **Admin** | Full CRUD (view, add, update, delete)        | Add Shipment button, Edit/Delete on rows/cards | All mutations allowed            |
+| **Employee** | Read-only                                    | Only view dashboard, no Add/Edit/Delete        | Queries only; mutations blocked |
+
+**Security Notes:**
+
+- JWT tokens expire in 1 hour  
+- Unauthorized access returns clear error messages  
+- Frontend checks roles before rendering sensitive UI
+
+**Default Credentials:**
+
+- Admin → `admin / admin`  
+- Employee → `employee / employee`
+
+---
 
 ## Setup Instructions
 
 ### Prerequisites
-- Node.js ≥ 18
-- npm / yarn / pnpm
-- Git
-- MongoDB (local or Atlas) or PostgreSQL (if used)
 
-### 1. Clone the Repository
+- **Node.js v18+** → [https://nodejs.org](https://nodejs.org)  
+- **Git** → Installed and configured with GitHub account  
+- **Accounts:** GitHub,Render (frontend), Render (backend)  
+
+### Local Development
+
 ```bash
-git clone <https://github.com/SharanGill31/tms-poc>
+# Clone the repo
+git clone https://github.com/SharanGill31/tms-poc.git
 cd tms-poc
-2. Backend Setup
-Bashcd backend
+Frontend (tms-frontend)
+cd tms-frontend
 npm install
-Create .env file in backend/:
-envPORT=4000
-NODE_ENV=development
-JWT_SECRET=your-very-secure-secret-here
-DATABASE_URL=mongodb+srv://user:pass@cluster.mongodb.net/tms-poc?retryWrites=true&w=majority
-# or PostgreSQL: DATABASE_URL=postgresql://user:pass@localhost:5432/tms
-Start backend:
-Bashnpm run dev
-# or
-npm start
-GraphQL Playground usually available at: http://localhost:4000
-3. Frontend Setup
-Bashcd ../frontend
+npm run dev
+# Opens at http://localhost:5173
+
+
+Login with admin/admin or employee/employee
+
+Backend (tms-backend)
+cd ../tms-backend
 npm install
-Create .env file in frontend/ (or use .env.local for Vite):
-envVITE_API_URL=http://localhost:4000
-# or for production: VITE_API_URL=https://tms-backend-fh93.onrender.com
-Start frontend:
-Bashnpm run dev
-# or
-npm start
-Open: http://localhost:5173 (Vite) or http://localhost:3000 (CRA)
-4. Default Credentials (for testing)
+node src/server.js
+# Runs on http://localhost:4000/graphql (Apollo Playground)
 
-Admin: Create one via registration or seed script (if available)
-Or use any registered account and promote to admin via database (role: "ADMIN")
 
-5. Production Deployment (Render.com)
-Both apps are already deployed:
+Enable CORS if needed:
 
-Frontend auto-deploys from GitHub on push to main
-Backend uses the same (ensure render.yaml or service settings are correct)
+cors: { origin: '*' }
 
-Environment variables must be set in Render dashboard.
-Folder Structure (example)
-texttms-poc/
-├── backend/
-│   ├── src/
-│   │   ├── resolvers/
-│   │   ├── models/
-│   │   ├── schema/
-│   │   └── index.js
-│   ├── .env
-│   └── package.json
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── hooks/
-│   │   └── App.jsx
-│   ├── public/
-│   └── package.json
-└── README.md
-Contributing
-Feel free to open issues or PRs for bug fixes, new features, or improvements.
+Testing
+
+Run frontend and backend simultaneously
+
+Test login, dashboard, pagination, role-based access
+
+GraphQL testing: Apollo Playground with JWT token in headers
+
+Live Demo
+
+Frontend: https://tms-vevb.onrender.com/login
+
+Backend: https://tms-backend-fh93.onrender.com
+
 License
-MIT License (or specify your license)
 
-TMS POC – Built with ❤️ for demonstration purposes
-Last updated: January 2026
+MIT License
+
+```bash
+# Clone the repo
+git clone https://github.com/SharanGill31/tms-poc.git
+cd tms-poc
