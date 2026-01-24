@@ -74,7 +74,7 @@ A modern web-based **Task Management System** (TMS) built as a Proof of Concept 
 
 ### 1. Clone the Repository
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/SharanGill31/tms-poc>
 cd tms-poc
 2. Backend Setup
 Bashcd backend
