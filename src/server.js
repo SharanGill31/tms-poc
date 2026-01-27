@@ -11,6 +11,14 @@ const server = new ApolloServer({
     const user = authMiddleware(req);
     return { user, shipments };
   },
+  cors: {
+    origin: '*',
+    credentials: true,
+  },
 });
 
-server.listen({ port: 4000 }).then(({ url }) => console.log(`Server ready at ${url}`));
+const PORT = process.env.PORT || 4000;
+
+server.listen({ port: PORT }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
