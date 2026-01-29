@@ -12,9 +12,9 @@ const server = new ApolloServer({
     return { user, shipments };
   },
   cors: {
-    origin: '*',
-    credentials: true,
-  },
+  origin: 'https://tms-poc-psi.vercel.app',
+  credentials: true,
+},
 });
 
 const PORT = process.env.PORT || 4000;
