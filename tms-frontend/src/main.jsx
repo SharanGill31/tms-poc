@@ -13,7 +13,7 @@ import './index.css';
 import { AuthProvider } from './context/AuthContext';
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: "https://tms-backend-fh93.onrender.com/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
